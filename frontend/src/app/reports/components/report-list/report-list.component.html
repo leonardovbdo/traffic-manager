@@ -1,0 +1,81 @@
+<mat-table [dataSource]="reports">
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+    <mat-cell *matCellDef="let report"> {{ report.title }} </mat-cell>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef> Localização </mat-header-cell>
+    <mat-cell *matCellDef="let report"> {{ report.location }} </mat-cell>
+  </ng-container>
+
+  <!-- Type Report ID Column -->
+  <ng-container class="type-report" matColumnDef="typeReport">
+    <mat-header-cell *matHeaderCellDef> Tipo Ocorrência </mat-header-cell>
+    <mat-cell *matCellDef="let report">{{ report.typeReport.description }}</mat-cell>
+  </ng-container>
+
+  <!-- Street ID Column -->
+  <ng-container matColumnDef="street">
+    <mat-header-cell *matHeaderCellDef> Rua </mat-header-cell>
+    <mat-cell *matCellDef="let report"> {{ report.street?.name }} </mat-cell>
+  </ng-container>
+
+  <!-- Date/Time Column -->
+  <ng-container matColumnDef="dateTime">
+    <mat-header-cell *matHeaderCellDef> Data/Hora </mat-header-cell>
+    <mat-cell *matCellDef="let report"> {{ report.dateTime | date:'dd/MM/yyyy HH:mm:ss'  }} </mat-cell>
+  </ng-container>
+
+  <!-- Latitude Column -->
+  <ng-container matColumnDef="latitude">
+    <mat-header-cell *matHeaderCellDef> Latitude </mat-header-cell>
+    <mat-cell *matCellDef="let report"> {{ report.latitude }} </mat-cell>
+  </ng-container>
+
+  <!-- Longitude Column -->
+  <ng-container matColumnDef="longitude">
+    <mat-header-cell *matHeaderCellDef> Longitude </mat-header-cell>
+    <mat-cell *matCellDef="let report"> {{ report.longitude }} </mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button
+        mat-mini-fab
+        color="accent"
+        aria-label="Adicionar uma Ocorrência"
+        (click)="onAdd()"
+        class="action-column-header"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let report" class="action-column">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Editar Ocorrência"
+        (click)="onDetail(report)"
+      >
+        <mat-icon>details</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Remover Ocorrência"
+        (click)="onDelete(report)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

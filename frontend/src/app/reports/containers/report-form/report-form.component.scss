@@ -1,0 +1,50 @@
+mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+  }
+  
+  .full-width{
+    width: 100%;
+  }
+  
+  .min-width {
+    width: 100%;
+    min-width: 150px;
+  }
+  
+  .btn-space {
+    margin-left: 5px;
+  }
+  
+  .actions-center {
+    justify-content: center;
+  }
+  
+  .form-array-error {
+    text-align: left;
+  }
+  
+  .line {
+    display: flex;
+    gap: 16px; 
+
+    mat-form-field {
+      flex: 1; /* Para ocupar o espaço disponível */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .main-section {
+        display: none;
+    }
+    
+    .line {
+        display: block;
+        gap: initial;
+  
+        mat-form-field {
+            flex: initial;
+        }
+    }
+}

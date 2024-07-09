@@ -1,0 +1,104 @@
+<mat-card>
+    <mat-toolbar color="primary">Detalhes da Ocorrência</mat-toolbar>
+  
+    <mat-card-content>
+      <form [formGroup]="form" class="min-width">
+
+        <div class="line">
+          <mat-form-field class="full-width">
+              <mat-label>Título</mat-label>
+              <input matInput formControlName="title" #title />
+              @if (form.get('title')?.invalid) {
+                <mat-error>
+                    {{ formUtils.getErrorMessage(form, 'title') }}
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Localização</mat-label>
+              <input matInput formControlName="location" />
+              @if (form.get('location')?.invalid) {
+                  <mat-error>
+                    {{ formUtils.getErrorMessage(form, 'location') }}
+                  </mat-error>
+              }
+            </mat-form-field>
+        </div>
+        <div class="line">
+
+            <mat-form-field class="full-width">
+              <mat-label>Tipo de Ocorrência</mat-label>
+              <input matInput [formControl]="typeReportNameControl" [matAutocomplete]="typeReportAuto" [disabled]="!isEditMode">
+              <mat-autocomplete autoActiveFirstOption #typeReportAuto="matAutocomplete" (optionSelected)="onTypeReportSelected($event)">
+                  @for (typeReport of filteredTypeReports | async; track typeReport) {
+                    <mat-option [value]="typeReport">{{ typeReport.description }}</mat-option>
+                  }
+              </mat-autocomplete>
+            </mat-form-field>
+    
+            <mat-form-field class="full-width">
+              <mat-label>Rua</mat-label>
+              <input matInput [formControl]="streetNameControl" [matAutocomplete]="streetAuto" [disabled]="!isEditMode">
+              <mat-autocomplete autoActiveFirstOption #streetAuto="matAutocomplete" (optionSelected)="onStreetSelected($event)">
+                  @for (street of filteredStreets | async; track street) {
+                    <mat-option [value]="street">{{ street.name }}</mat-option>
+                  }
+              </mat-autocomplete>
+            </mat-form-field>
+      
+            <mat-form-field class="full-width">
+              <mat-label>Data</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dateTime" #dateTime [disabled]="!isEditMode"/>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+  
+        <div class="line">
+            <mat-form-field class="full-width">
+              <mat-label>Latitude</mat-label>
+              <input matInput formControlName="latitude" #latitude />
+              @if (form.get('latitude')?.invalid) {
+                  <mat-error>
+                    {{ formUtils.getErrorMessage(form, 'latitude') }}
+                  </mat-error>
+    
+              }
+            </mat-form-field>
+      
+            <mat-form-field class="full-width">
+              <input matInput formControlName="longitude" #longitude />
+              <mat-label>Longitude</mat-label>
+              @if (form.get('longitude')?.invalid) {
+                  <mat-error>
+                    {{ formUtils.getErrorMessage(form, 'longitude') }}
+                  </mat-error>
+    
+              }
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="full-width">
+          <mat-label>Descrição</mat-label>
+            <textarea matInput formControlName="description" rows="5" [disabled]="!isEditMode"></textarea>
+            @if (form.get('description')?.invalid) {
+                <mat-error>
+                  {{ formUtils.getErrorMessage(form, 'description') }}
+                </mat-error>
+            }
+          </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="actions-center">
+      @if (isEditMode) {
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+            Salvar
+        </button>
+      }
+        <button mat-raised-button (click)="onCancel()" class="btn-space">
+            Cancelar
+        </button>
+    </mat-card-actions>
+  </mat-card>
+  

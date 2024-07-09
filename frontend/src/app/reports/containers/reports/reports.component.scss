@@ -1,0 +1,37 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between; 
+  .logout-button {
+    margin-left: 8px; 
+  }
+
+  button {
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    padding: 20px 40px;
+    cursor: pointer;
+  }
+}
+
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.loading-spinner {
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
